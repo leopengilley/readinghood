@@ -26,7 +26,14 @@ SECRET_KEY = 'django-insecure-dso-%4kksu^3)+r%j$iw_l3-=y2&9l!=1zfe3#i5*+7et62q2o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+## For example, for a site URL at 'web-production-3640.up.railway.app'
+## (replace the string below with your own site URL):
+ALLOWED_HOSTS = ['web-production-3640.up.railway.app', '127.0.0.1']
+
+# During development, you can instead set just the base URL
+# (you might decide to change the site a few times).
+# ALLOWED_HOSTS = ['.railway.com','127.0.0.1']
+
 
 
 # Application definition
