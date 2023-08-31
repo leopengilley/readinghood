@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title%}Categories{% endblock %}
+
+{% block content %}
+
+
+  {% for category in categories %}
+    <div class="card border-dark mb-3" style="width: 18rem;">
+      <p>{{ category.title}}</p>
+    </div>
+  {% endfor %}
+
+
+{% endblock %}

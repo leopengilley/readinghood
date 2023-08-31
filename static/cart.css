@@ -1,0 +1,18 @@
+h2 {
+    margin: 0 auto;
+}
+
+.cart {
+  border: 1px solid black;
+  width: 50%;
+  margin: 5% auto;
+}
+
+.bin {
+  color: red;
+}
+
+th {
+  font-weight: bolder;
+  font-size: 1.1em;
+}

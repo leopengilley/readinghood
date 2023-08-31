@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title%}Catalogue{% endblock %}
+
+{% block content %}
+
+<div class="catalogue">
+  <div class="filter">
+    <form method="get" action="{% url 'catalogue' %}">
+        {{ form.as_p }}
+        <button type="submit">Apply Filters</button>
+    </form>
+  </div>
+
+  <div class="books">
+    {% for book in page_obj %}
+      <div class="card border-dark mb-3 box3" style="width: 18rem;">
+        <img src="{{ book.image_url }}" class="card-img-top" alt="{{ book.title }}">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'book_detail' book.bookid %}">{{ book.title }}</a></h5>
+            <p class="card-text">{{ book.bookdescription|truncatechars_html:100 }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price: {{ book.price }}</li>
+            <li class="list-group-item">Author: {{ book.author }}</li>
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+{% endblock %}

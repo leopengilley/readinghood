@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title%}Reviews{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <h2>Top reviews</h2>
+    <br>
+    {% if top_review_list %}
+    <div>
+        {% for review in top_review_list %}
+        <div>
+            <h4>
+            {{ review.bookid.title }}
+            </h4>
+            <h6>rated {{ review.rating }} of 10 by {{ review.userid.username }}</h6>
+            <p>{{ review.comment }}</p>
+        </div>
+        <br>
+        {% endfor %}
+    </div>   
+    {% else %}
+    <p>No reviews are available.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

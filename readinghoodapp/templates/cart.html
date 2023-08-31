@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load bootstrap_icons %}
+
+{% block title%}Shopping Cart{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<link href="{% static 'cart.css' %}" rel="stylesheet" />
+
+<main>
+  <table class="table cart border-dark mb-3">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">Book</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+      <tr>
+        <td>{{item.title}}</td>
+        <td>
+          <a href="{% url 'remove_single_item_from_cart'%}?data={{item.bookid}}">
+            {% bs_icon 'dash-circle' %}
+          </a>
+          {{item.quantity}}
+          <a href="{% url 'add_to_cart'%}?data={{item.bookid}}">
+            {% bs_icon 'plus-circle' %}
+          </a>
+        </td>
+        <td>
+          ${{ item.get_total_item_price }}
+        </td>
+        <td>
+          <a href="{% url 'remove_from_cart'%}?data={{item.bookid}}" class="bin">
+            {% bs_icon 'trash3' %}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    <tr>
+      <td>
+        <!-- <a href="{% url 'checkout' %}">Checkout {% bs_icon 'cart3' %}</a> -->
+        <div class="btn-right">
+          <form action="{% url 'checkout' %}">
+            <button class="btn btn-warning" id="checkout-button" href="{% url 'checkout' %}">Checkout</button>
+          </form>
+        </div>
+      </td>
+      <td></td>
+      <td>
+        <!-- {{ shoppingcart.get_total }} -->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+{% endblock %}

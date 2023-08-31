@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title%}Checkout{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'checkout.css' %}" rel="stylesheet" />
+
+<main >
+    <div class="container wow fadeIn">
+
+        {% if user.is_authenticated %}
+
+        <h1 class="my-5 h1 text-center">Confirm and Payment</h1>
+        <div class="back-link-container">
+            <a class="back-link" href="javascript:history.back()">Go Back to Delivery Information</a>
+        </div>
+        <div class="row">
+            <div class="col-md-8 mb-d">
+                <div class="card">
+                    <form method="POST" class="card-body">
+                        {% csrf_token %}
+
+                        <h3>Credit Card Details</h3>
+
+                        <br>
+
+                        <div>
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <label for="card_name">Card Holder Name</label>
+                                {{ form.card_name }}
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <label for="card_number">Card Number</label>
+                                {{ form.card_number }}
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <label for="expiry_date">Expiry Date</label>
+                                {{ form.expiry_date }}
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <label for="security_code">Security Code</label>
+                                {{ form.security_code }}
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="btn-right">
+                            <button class="btn btn-warning" id="confirm-purchase" href="{% url 'thankyou' %}" type="submit">Confirm Your Purchase</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                {% include "order_snippet.html" %}
+            </div>
+
+        </div>
+        
+        {% else %}
+        <br>
+        <center>
+        <h1>You must have an account to make a purchase</h1>
+        <h4>
+            Please <a href="{% url 'signup' %}">sign up</a> or <a href="{% url 'login' %}">log in</a> to complete your purchase.
+        </h4>
+        </center>
+        {% endif %}
+        
+    </div>
+</main>
+{% endblock content %}

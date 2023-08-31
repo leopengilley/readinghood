@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}Profile{% endblock %}
+
+{% block content %}
+
+{% if profile %}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-8">
+                <h2>{{ profile.user.username }}'s Profile</h2>
+            <br>
+            {% if posts %}
+                {% for post in posts %}
+                <div class="alert alert-warning" role="alert">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1">
+                            {% if profile.profile_image %}
+                            <img src="{{ profile.profile_image.url }}" width="50" height="50" class="rounded-circle" alt="{{ profile.user.username }}">
+                            {% else %}
+                            <img src="{% static 'images\default_profile_photo.jpg' %}" width="50" height="50" class="rounded-circle" alt="Default profile image">
+                            {% endif %}
+                            </div>
+
+                            <div class="col-10">
+                            {{ post.body }}
+                            <br>
+                            <small class="text-muted">
+                                {{ post.created_at }} In {{ post.community.name }} By @{{ post.user.username }}
+                            </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+
+            <div class="col-4">
+            <br><br><br>
+            {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url}}" class="image_fixed_size">
+            <br><br>
+            {% endif %}
+                <div class="card">
+                    <h5 class="card-header">Follows</h5>
+                    <div class="card-body">
+                      <p class="card-text">
+                        {% for following in profile.follows.all %}
+                            <a href="{% url 'profile' following.user.id %}">
+                            @{{ following }}</a><br/>
+                        {% endfor %}
+                      </p>
+                    </div>
+                  </div>
+
+                <br><br>
+                <div class="card">
+                    <h5 class="card-header">Followed by</h5>
+                    <div class="card-body">
+                      <p class="card-text">
+                        {% for following in profile.followed_by.all %}
+                            <a href="{% url 'profile' following.user.id %}">
+                            @{{ following }}</a><br/>
+                        {% endfor %}
+                      </p>
+                    </div>
+                </div>
+                <br>
+                <form method="POST">
+                {% csrf_token %}
+                {% if profile in user.profile.follows.all %}
+                    <button class="btn btn-outline-danger" name="follow"
+                    value="unfollow" type="submit">Unfollow @{{ profile.user.username }}</button>
+                {% else %}
+                    <button class="btn btn-outline-success" name="follow"
+                    value="follow" type="submit">Follow @{{ profile.user.username }}</button>
+                {% endif %}
+                </form>
+                <br>
+                <!-- Check if user is the intended user -->
+                {% if request.user.id == profile.user.id %}
+                    <a href="{% url 'edit_profile' %}" class="btn btn-outline-warning">Edit Profile</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+{% endblock %}

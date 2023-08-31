@@ -1,0 +1,35 @@
+.btn-left {
+    float: left;
+}
+
+.btn-right {
+    float: right;
+}
+
+.btn-center {
+    text-align: center;
+}
+
+.back-link-container {
+    text-align: left;
+    margin-left:25px;
+}
+  
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #293241;
+    font-family: fantasy;
+}
+  
+.back-link:before {
+    content: "◀ ";
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.back-link:hover {
+    text-decoration: underline;
+    color: #475769;
+}

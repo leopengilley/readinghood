@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block title%}Checkout{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'checkout.css' %}" rel="stylesheet" />
+
+<main >
+    <div class="container wow fadeIn">
+
+        {% if user.is_authenticated %}
+
+        <h1 class="my-5 h1 text-center">Delivery/Billing Information</h1>
+        <div class="back-link-container">
+            <a class="back-link" href="{% url 'showcart' %}">Go Back to View Cart</a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="card">
+                        <form method="POST" class="card-body">
+                            {% csrf_token %}
+
+                            <h3>Delivery Address</h3>
+
+                            <br>
+
+                            <div class='hideable_shipping_form'>
+                                <div class="md-form mb-5">
+                                    <label for="shipping_address">Address Line 1</label>
+                                    {{ form.shipping_address1 }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="shipping_address2">Address Line 2</label>
+                                    {{ form.shipping_address2 }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="city">City / Suburb</label>
+                                    {{ form.shipping_city }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="state">State</label>
+                                    {{ form.shipping_state }}
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="postcode">Postcode</label>
+                                    {{ form.shipping_postcode }}
+                                    <div class="invalid-feedback">
+                                        Postcode required.
+                                    </div>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
+                                    <label class="custom-control-label" for="same_billing_address">Billing address is the same as my shipping address</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="set_default_shipping" id="set_default_shipping">
+                                    <label class="custom-control-label" for="set_default_shipping">Save as default shipping address</label>
+                                </div>
+                                
+                            </div>
+
+                                {% if default_shipping_address %}
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="use_default_shipping" id="use_default_shipping">
+                                    <label class="custom-control-label" for="use_default_shipping">Use default shipping address: {{ default_shipping_address.address1|truncatechars:10 }}</label>
+                                </div>
+                                {% endif %}
+
+                            <hr>
+
+                            <h3>Billing Address</h3>
+
+                            <br>
+
+                            <div class='hideable_billing_form'>
+                                <div class="md-form mb-5">
+                                    <label for="shipping_address">Address Line 1</label>
+                                    {{ form.billing_address1 }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="shipping_address2">Address Line 2</label>
+                                    {{ form.billing_address2 }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="city">City / Suburb</label>
+                                    {{ form.billing_city }}
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="state">State</label>
+                                    {{ form.billing_state }}
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+
+                                <div class="md-form mb-5">
+                                    <label for="postcode">Postcode</label>
+                                    {{ form.billing_postcode }}
+                                    <div class="invalid-feedback">
+                                        Postcode required.
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="set_default_billing" id="set_default_billing">
+                                    <label class="custom-control-label" for="set_default_billing">Save as default billing address</label>
+                                </div>
+                            </div>
+
+                            {% if default_billing_address %}
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="use_default_billing" id="use_default_billing">
+                                <label class="custom-control-label" for="use_default_billing">Use default billing address: {{ default_billing_address.address1|truncatechars:10 }}</label>
+                            </div>
+                            {% endif %}
+
+                            <hr>
+
+                            <h3>Delivery Options</h3>
+
+                            <div class="d-block my-3">
+                                <div class="md-form mb-5">
+                                    <label for="delivery_options">Please choose a delivery type:</label>
+                                    {{ form.delivery_options }}
+                                </div>
+                            </div>
+                            
+                            <hr>
+
+                            <div class="btn-right">
+                                <button class="btn btn-warning" id="payment" type="submit">Continue to Payment</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    {% include "order_snippet.html" %}
+                </div>
+
+            </div>
+        </div>
+
+        {% else %}
+        <br>
+        <center>
+        <h1>You must have an account to make a purchase</h1>
+        <h4>
+            Please <a href="{% url 'signup' %}">sign up</a> or <a href="{% url 'login' %}">log in</a> to complete your purchase.
+        </h4>
+        </center>
+        {% endif %}
+        
+    </div>
+</main>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+var hideable_shipping_form = $('.hideable_shipping_form');
+var hideable_billing_form = $('.hideable_billing_form');
+
+var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
+var same_billing_address = document.querySelector("input[name=same_billing_address]"); 
+
+use_default_shipping.addEventListener('change', function() {
+  if (this.checked) {
+    hideable_shipping_form.hide();
+  } else {
+    hideable_shipping_form.show();
+  }
+})
+
+same_billing_address.addEventListener('change', function() {
+  if (this.checked) {
+    hideable_billing_form.hide();
+  } else {
+    hideable_billing_form.show();
+  }
+})
+
+</script>
+{% endblock extra_scripts %}

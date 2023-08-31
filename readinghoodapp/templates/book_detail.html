@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title%}Book Details{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<link href="{% static 'book_page.css' %}" rel="stylesheet" />
+<div class="page-container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{book_detail.image_url}}" class="book-image" alt="Book Image">
+        </div>
+
+        <div class="col-md-5">
+            <h1>{{ book_detail.title }}</h1>
+            <h4>By {{ book_detail.author }}</h4>
+            <p>&nbsp;</p>
+            <p><strong>Genre:</strong> {{ book_detail.category }}</p>
+            <p><strong>Publisher:</strong> {{ book_detail.publisher }}</p>
+            <p><strong>Publication Year:</strong> {{ book_detail.publicationyear }}</p>
+            <p><strong>Description:</strong></p>
+            <p>{{ book_detail.bookdescription }}</p>
+            <p><strong>Average Rating:</strong> {{ book_detail.average_rating }}</p>
+            <p><strong>Price:</strong> {{ book_detail.price }}</p>
+            <form action="/add_to_cart/">
+                {% csrf_token %}
+                <input type="hidden" name="bookid" value={{book_detail.bookid}}>
+                <p><strong>Quantity:</strong>
+                    <input type="number" name="quantity" min="1" value="1" style="width: 80px">
+                </p>
+                <button type="submit" id="add-to-cart">Add to Cart</button>
+            </form>
+            <br>
+            <div class="btn-right">
+              <form action="{% url 'showcart' %}">
+                <button class="btn btn-warning" id="cart-button" href="{% url 'showcart' %}">See cart</button>
+              </form>
+            </div>
+            <p>&nbsp;</p>
+            <div class="border-top pt-3">
+                <h3>Book Reviews</h3>
+                <ul>
+                {% for review in ratings_reviews %}
+                <li>
+                    <strong>{{ review.username }}</strong>: {{ review.comment }}
+                </li>
+                {% empty %}
+                <li>No reviews yet.</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>    
+
+{% endblock %}

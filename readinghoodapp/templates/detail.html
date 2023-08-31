@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title%}Book Details{% endblock %}
+
+
+{% block content %}
+{% load static %}
+    <link href="{% static 'book_page.css' %}" rel="stylesheet" />
+    <script src="{% static 'previous_page.js' %}"></script>
+<div class="page-container">
+    <div class="back-link-container">
+        <a class="back-link" href="javascript:history.back()">Previous Page</a>
+    </div>
+    
+    <div class="book-info">
+        <div class="book-image">
+            <img src="{{book.image_url_l}}" alt="Book Image" width=500px>
+        </div>
+        <div class="book-details">
+            <h1>{{ book.title }}</h1>
+            <h4>By {{ book.author }}</h4>
+            <p>&nbsp;</p>
+            <p><strong>Genre:</strong> {{ book.genre }}</p>
+            <p><strong>Publisher:</strong> {{ book.publisherid.name }}</p>
+            <p><strong>Publication Year:</strong> {{ book.publicationyear }}</p>
+            <p>&nbsp;</p>
+            <p><strong>Description:</strong></p>
+            <p>{{ book.description }}</p>
+            <p><strong>Average Rating:</strong> {{ book.average_rating }}</p>             <p>&nbsp;</p>
+            <p><strong>Price:</strong> {{ book.price }}</p>
+            <p><strong>Quantity:</strong>
+                <input type="number" name="quantity" min="1" value="1" style="width: 80px">
+            </p>
+            <button id="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+            
+    
+      <div class="book-review">
+    <h3>Book Reviews</h3>
+    <ul>
+        {% for review in Books.reviews %}
+        <li>
+            <strong>{{ review.username }}</strong>: {{ review.comment }}
+        </li>
+        {% empty %}
+        <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+      </div>
+</div>
+
+
+{% endblock %}

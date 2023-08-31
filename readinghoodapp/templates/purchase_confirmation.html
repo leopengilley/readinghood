@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title%}Thank You{% endblock %}
+
+{% block content %}
+
+<div class="purchase-confirmation">
+    
+    {% if user.is_authenticated %}
+
+    <div class="text-center">
+        <h3 class="my-5 h1 text-center">Thank you for your purchase!</h3>
+        <h6 class="my-5 h4 text-center">We will send you a confirmation email once your order has been shipped.</h6>
+        <form action="{% url 'home' %}">
+            <button class="btn btn-warning btn-lg" id="continue-shopping" href="{% url 'home' %}">Continue Shopping</button>
+        </form>
+    
+    <br>
+    
+    </div>
+        <div class="container wow fadeIn">
+            <div class="card">
+                <small>Order Number: </small> {{ orders.orderid }}
+                <small>Order Date: </small> {{ orders.orderdate }}
+                <small>Delivery Details: 
+                    {{ address.firstname }} {{ address.lastname }}
+                    {{ address.address1 }}
+                    {{ address.address2 }}
+                    {{ address.city }}, {{ address.state }}, {{ address.postcode }}
+                </small> 
+
+                <hr>
+
+                <div class="col-md-12 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Order Summary</span>
+                    </h4>
+                    <ul class="list-group mb-3 z-depth-1">
+                
+                    {% for order_item in orders.orderid.itemid %}
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <div class="book-image">
+                                <img src="{{books.image_url_s}}" alt="Book Image" draggable="false">
+                            </div>
+                        <h6 class="my-0">{{ order_item.quantity }} x {{ order_item.bookid.title}}</h6>
+                        <small class="text-muted">{{ order_item.bookid.author }}</small>
+                        </div>
+                        <span class="text-muted">${{ order_item.get_total_item_price }}</span>
+                    </li>
+                    {% endfor %}
+                
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (AUD)</span>
+                        <strong>${{ order.get_total }}</strong>
+                    </li>
+                    </ul>
+                
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <br>
+        <center>
+        <h1>You must have an account to make a purchase</h1>
+        <h4>
+            Please <a href="{% url 'signup' %}">sign up</a> or <a href="{% url 'login' %}">log in</a> to complete your purchase.
+        </h4>
+        </center>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
