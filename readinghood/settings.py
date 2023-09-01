@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-dso-%4kksu^3)+r%j$iw_l3-=y2&9l!=1zfe3#i5*+7et62q2o
 
 ## For example, for a site URL at 'web-production-3640.up.railway.app'
 ## (replace the string below with your own site URL):
-ALLOWED_HOSTS = ['web-production-3640.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['web-production-9658.up.railway.app', '127.0.0.1']
 
 # During development, you can instead set just the base URL
 # (you might decide to change the site a few times).
@@ -36,10 +36,12 @@ ALLOWED_HOSTS = ['web-production-3640.up.railway.app', '127.0.0.1']
 
 ## For example, for a site URL is at 'web-production-3640.up.railway.app'
 ## (replace the string below with your own site URL):
-CSRF_TRUSTED_ORIGINS = ['https://web-production-3640.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['web-production-9658.up.railway.app']
 
 # During development/for this tutorial you can instead set just the base URL
 # CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -104,6 +106,12 @@ WSGI_APPLICATION = 'readinghood.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
