@@ -163,7 +163,7 @@ class Book(models.Model):
         return reverse('readinghoodapp:detail', args=[self.bookid,])
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'book'
 
 
