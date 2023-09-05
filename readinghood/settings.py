@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'readinghood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'readinghood',
+        # 'NAME': 'readinghood',
         'USER': 'root',
         # pqSE42#!
         'PASSWORD': 'eFEiGKeIqXVJkXqmEVd0',
