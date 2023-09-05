@@ -75,6 +75,7 @@ marshmallow-enum==1.5.1
 marshmallow-oneofschema==3.0.1
 marshmallow-sqlalchemy==0.26.1
 mdurl==0.1.2
+mysqlclient==2.2.0
 networkx==2.8.8
 numpy==1.25.2
 openapi-schema-validator==0.2.3
