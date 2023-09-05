@@ -157,7 +157,8 @@ class Book(models.Model):
         return f"{average:.2f}"
 
     def __str__(self):
-        return str(self.bookid)
+        # bookid
+        return str(self.title)
 
     def get_absolute_url(self):
         return reverse('readinghoodapp:detail', args=[self.bookid,])
