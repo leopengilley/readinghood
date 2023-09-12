@@ -13,5 +13,6 @@ pandas==1.5.3
 Pillow==10.0.0
 psycopg2-binary==2.9.7
 python-dateutil==2.8.2
+viewflow==0.1.0
 wheel==0.37.1
 whitenoise==6.5.0
