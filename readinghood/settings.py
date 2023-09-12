@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['web-production-9658.up.railway.app', '127.0.0.1']
 
 # During development, you can instead set just the base URL
 # (you might decide to change the site a few times).
-ALLOWED_HOSTS = ['.railway.com','127.0.0.1']
+# ALLOWED_HOSTS = ['.railway.com','127.0.0.1']
 
 ## For example, for a site URL is at 'web-production-3640.up.railway.app'
 ## (replace the string below with your own site URL):
@@ -94,24 +94,24 @@ WSGI_APPLICATION = 'readinghood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'readinghood',
-        'USER': 'root',
-        # pqSE42#!
-        'PASSWORD': 'eFEiGKeIqXVJkXqmEVd0',
-        'HOST': 'containers-us-west-82.railway.app',
-        'PORT': '5930',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.mysql',
+#         # 'NAME': 'readinghood',
+#         'USER': 'root',
+#         # pqSE42#!
+#         'PASSWORD': 'eFEiGKeIqXVJkXqmEVd0',
+#         'HOST': 'containers-us-west-82.railway.app',
+#         'PORT': '5930',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
