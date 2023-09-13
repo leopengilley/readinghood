@@ -6,7 +6,7 @@
       "providers": ["python"],
       "phases": {
         "setup": {
-          "nixPkgs": ["...", "nodejs", "libffi"]
+          "nixPkgs": ["...", "nodejs"]
         },
         "ci": {
           "dependsOn": ["setup"],
