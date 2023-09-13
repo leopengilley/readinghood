@@ -1,0 +1,9 @@
+build:
+  steps:
+    - name: Clear Cache
+      command: railway cache:clear
+
+    - name: Install Dependencies
+      command: railway run pip install -r requirements.txt
+
+    # Add more build steps as needed
