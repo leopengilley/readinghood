@@ -10,10 +10,11 @@ django-viewflow==2.0.0b7
 email-validator==1.3.1
 gunicorn==21.2.0
 marshmallow==3.20.1
+mysqlclient==2.2.0 --install-option="--mysql-config=/usr/local/opt/mysql-client/bin/mysql_config"
+mysql-python==1.2.5
 numpy==1.25.2
 pandas==1.5.3
 Pillow==10.0.0
-psycopg2-binary==2.9.7
 python-dateutil==2.8.2
 viewflow==0.1.0
 wheel==0.37.1

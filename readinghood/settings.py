@@ -97,12 +97,12 @@ WSGI_APPLICATION = 'readinghood.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         # 'NAME': 'readinghood',
+#         'NAME': 'readinghood',
 #         'USER': 'root',
 #         # pqSE42#!
-#         'PASSWORD': 'eFEiGKeIqXVJkXqmEVd0',
-#         'HOST': 'containers-us-west-82.railway.app',
-#         'PORT': '5930',
+#         'PASSWORD': 'MySQL123!',
+#         # 'HOST': 'containers-us-west-82.railway.app',
+#         # 'PORT': '5930',
 #     }
 # }
 
@@ -113,14 +113,26 @@ WSGI_APPLICATION = 'readinghood.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ["PGDATABASE"],
+#         'USER': os.environ["PGUSER"],
+#         'PASSWORD': os.environ["PGPASSWORD"],
+#         'HOST': os.environ["PGHOST"],
+#         'PORT': os.environ["PGPORT"],
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ["MYSQLDATABASE"],
+        'USER': os.environ["MYSQLUSER"],
+        'PASSWORD': os.environ["MYSQLPASSWORD"],
+        'HOST': os.environ["MYSQLHOST"],
+        'PORT': os.environ["MYSQLPORT"],
     }
 }
 
