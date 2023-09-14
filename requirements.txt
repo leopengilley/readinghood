@@ -1,4 +1,4 @@
-cffi==1.15.1
+argon2-cffi==23.1.0
 cryptography==41.0.3
 dj-database-url==2.1.0
 Django==4.2.4
@@ -15,6 +15,7 @@ mysqlclient==2.2.0 --install-option="--mysql-config=/usr/local/opt/mysql-client/
 mysql-python==1.2.5
 numpy==1.25.2
 pandas==1.5.3
+passlib==1.7.4
 Pillow==10.0.0
 python-dateutil==2.8.2
 viewflow==0.1.0
